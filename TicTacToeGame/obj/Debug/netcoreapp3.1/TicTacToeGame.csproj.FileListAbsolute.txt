@@ -1,0 +1,13 @@
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.exe
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.deps.json
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.runtimeconfig.json
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.runtimeconfig.dev.json
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.dll
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\bin\Debug\netcoreapp3.1\TicTacToeGame.pdb
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.csprojAssemblyReference.cache
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.AssemblyInfoInputs.cache
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.AssemblyInfo.cs
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.csproj.CoreCompileInputs.cache
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.dll
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.pdb
+C:\Users\saiku\source\repos\TicTacToeGame\TicTacToeGame\obj\Debug\netcoreapp3.1\TicTacToeGame.genruntimeconfig.cache
