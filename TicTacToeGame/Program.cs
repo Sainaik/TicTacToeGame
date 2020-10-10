@@ -10,6 +10,23 @@ namespace TicTacToeGame
 
 
             char[] ticTacToeBoard = CreateTicTacToeBoard();
+
+            Console.WriteLine("Board is Created \n");
+
+            //to choose Symbol
+
+            char userSymbol = ChoosePlayerSymbil();
+
+            char systemSymbol = 'X';
+
+            if(systemSymbol == userSymbol)
+            {
+                systemSymbol = 'O';
+            }
+
+            Console.WriteLine("User Symbol : " + userSymbol);
+
+            Console.WriteLine("Computer Symbol : " + systemSymbol);
         }
 
         public static char[] CreateTicTacToeBoard()
@@ -23,5 +40,37 @@ namespace TicTacToeGame
             
             return ticTacToeBoard;
         }
+
+        public static char  ChoosePlayerSymbil()
+        {
+            Console.WriteLine("choose your playing symbol(O or X):");
+
+            String playerSymbol = Console.ReadLine();
+
+            bool correctSymbol = true;
+
+            while (correctSymbol)
+            {
+                if (!playerSymbol.Equals("X") && !playerSymbol.Equals("O"))
+                {
+                    Console.WriteLine("please choose playing symbol between (O or X):");
+                    playerSymbol = Console.ReadLine();
+                }
+                else
+                {
+                    correctSymbol = false;
+                }
+
+            }
+
+            return char.ToUpper(playerSymbol[0]);
+
+        }
     }
+
+
+
+    
+
+
 }
