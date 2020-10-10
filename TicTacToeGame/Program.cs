@@ -15,7 +15,7 @@ namespace TicTacToeGame
 
             //to choose Symbol
 
-            char userSymbol = ChoosePlayerSymbil();
+            char userSymbol = ChoosePlayerSymbol();
 
             char systemSymbol = 'X';
 
@@ -26,9 +26,12 @@ namespace TicTacToeGame
 
             Console.WriteLine("User Symbol : " + userSymbol);
 
-            Console.WriteLine("Computer Symbol : " + systemSymbol);
+            Console.WriteLine("Computer Symbol : " + systemSymbol+"\n");
+
+            ShowBoard(ticTacToeBoard);
         }
 
+        /*UC 1*/
         public static char[] CreateTicTacToeBoard()
         {
             char[] ticTacToeBoard = new char[10];
@@ -41,7 +44,8 @@ namespace TicTacToeGame
             return ticTacToeBoard;
         }
 
-        public static char  ChoosePlayerSymbil()
+        /*UC 2*/
+        public static char  ChoosePlayerSymbol()
         {
             Console.WriteLine("choose your playing symbol(O or X):");
 
@@ -66,11 +70,37 @@ namespace TicTacToeGame
             return char.ToUpper(playerSymbol[0]);
 
         }
+
+        static void ShowBoard(char[] ticTacToeBoard)
+        {
+
+            for (int i = 1; i < 10;)
+            {
+
+                for (int j = 1; j <= 3; j++)
+                {
+
+                    if (j != 3)
+                    {
+                        Console.Write(ticTacToeBoard[i] + "  |");
+                    }
+                    else
+                    {
+                        Console.Write(ticTacToeBoard[i]);
+                    }
+                    i++;
+                }
+
+                Console.WriteLine("\n");
+            }
+
+        }
+
     }
 
 
 
-    
+
 
 
 }
