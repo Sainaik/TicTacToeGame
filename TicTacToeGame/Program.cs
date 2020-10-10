@@ -17,17 +17,6 @@ namespace TicTacToeGame
 
             char userSymbol = ChoosePlayerSymbol();
 
-            char systemSymbol = 'X';
-
-            if(systemSymbol == userSymbol)
-            {
-                systemSymbol = 'O';
-            }
-
-            Console.WriteLine("User Symbol : " + userSymbol);
-
-            Console.WriteLine("Computer Symbol : " + systemSymbol+"\n");
-
             ShowBoard(ticTacToeBoard);
         }
 
@@ -67,11 +56,26 @@ namespace TicTacToeGame
 
             }
 
-            return char.ToUpper(playerSymbol[0]);
+            char userSymbol = char.ToUpper(playerSymbol[0]);
+
+            char systemSymbol = 'X';
+
+            if (systemSymbol == userSymbol)
+            {
+                systemSymbol = 'O';
+            }
+
+            Console.WriteLine("User Symbol : " + userSymbol);
+
+            Console.WriteLine("Computer Symbol : " + systemSymbol + "\n");
+
+
+            return userSymbol;
 
         }
 
-        static void ShowBoard(char[] ticTacToeBoard)
+        /* UC3 */
+        public static void ShowBoard(char[] ticTacToeBoard)
         {
 
             for (int i = 1; i < 10;)
