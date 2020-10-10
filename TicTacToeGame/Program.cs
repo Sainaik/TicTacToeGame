@@ -18,6 +18,8 @@ namespace TicTacToeGame
             char userSymbol = ChoosePlayerSymbol();
 
             ShowBoard(ticTacToeBoard);
+
+            int usersMove = UsersMove(ticTacToeBoard);
         }
 
         /*UC 1*/
@@ -99,6 +101,33 @@ namespace TicTacToeGame
             }
 
         }
+
+
+        public static int UsersMove(char[] ticTacToeBoard)
+        {
+            Console.WriteLine("Enter the your move between 1 to 9");
+
+            int userMove = Convert.ToInt32(Console.ReadLine());
+            bool isnotCorrect = true;
+            while (isnotCorrect)
+            {
+                if (userMove <= 9 && userMove >= 1 && ticTacToeBoard[userMove] == ' ')
+                {
+                    return userMove;
+                }
+                else
+                {
+                    Console.WriteLine("Postion is occupied!! Enter other move between 1 to 9");
+
+                    userMove = Convert.ToInt32(Console.ReadLine());
+
+                }
+            }
+
+            return userMove;
+        }
+
+       
 
     }
 
