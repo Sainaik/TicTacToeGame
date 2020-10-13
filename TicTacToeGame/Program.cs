@@ -6,6 +6,10 @@ namespace TicTacToeGame
     class Program
     {
         static char[] ticTacToeBoard;
+        static char userSymbol;
+        static char computerSymbol = 'X';
+        const int PLAYER = 1;
+        const int COMPUTER = 2;
 
         static void Main(string[] args)
         {
@@ -16,19 +20,32 @@ namespace TicTacToeGame
 
             Console.WriteLine("Board is Created \n");
 
-            //to choose Symbol
-
-            char userSymbol = ChoosePlayerSymbol();
-
             //to show the playing board
             ShowBoard();
 
+            //to choose Symbol
+            userSymbol = ChoosePlayerSymbol();
+
+            //to choose the first player
+            int whoStartsGame = Toss();
+
+            bool notwin = true;
+
             //to play a move
-            UsersMove(userSymbol);
 
+            if (whoStartsGame == PLAYER)
+            {
+                Console.WriteLine("User Starts playing first");
+                UsersMove(userSymbol);
 
+            }
+            else
+            {
+                Console.WriteLine("Computer Starts playing first");
+                UsersMove(computerSymbol);
+            }
 
-
+         
         }
 
         /*UC 1*/
@@ -69,16 +86,15 @@ namespace TicTacToeGame
 
             char userSymbol = char.ToUpper(playerSymbol[0]);
 
-            char systemSymbol = 'X';
 
-            if (systemSymbol == userSymbol)
+            if (computerSymbol == userSymbol)
             {
-                systemSymbol = 'O';
+                computerSymbol = 'O';
             }
 
             Console.WriteLine("User Symbol : " + userSymbol);
 
-            Console.WriteLine("Computer Symbol : " + systemSymbol + "\n");
+            Console.WriteLine("Computer Symbol : " + computerSymbol + "\n");
 
 
             return userSymbol;
@@ -133,6 +149,16 @@ namespace TicTacToeGame
            
         }
 
+        /*UC6*/
+        static int Toss()
+        {
+            Random random = new Random();
+            return random.Next(1, 3);
+        }
+
+
+
+        
     }
 
 }
