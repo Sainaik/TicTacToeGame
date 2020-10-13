@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace TicTacToeGame
 {
     class Program
     {
+        static char[] ticTacToeBoard;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello!, Welcome to TicTac Toe Game");
 
 
-            char[] ticTacToeBoard = CreateTicTacToeBoard();
+            ticTacToeBoard = CreateTicTacToeBoard();
 
             Console.WriteLine("Board is Created \n");
 
@@ -17,9 +20,15 @@ namespace TicTacToeGame
 
             char userSymbol = ChoosePlayerSymbol();
 
-            ShowBoard(ticTacToeBoard);
+            //to show the playing board
+            ShowBoard();
 
-            int usersMove = UsersMove(ticTacToeBoard);
+            //to play a move
+            UsersMove(userSymbol);
+
+
+
+
         }
 
         /*UC 1*/
@@ -77,63 +86,53 @@ namespace TicTacToeGame
         }
 
         /* UC3 */
-        public static void ShowBoard(char[] ticTacToeBoard)
+        public static void ShowBoard()
         {
+            Console.WriteLine(ticTacToeBoard[1] + "  |  " + ticTacToeBoard[2] + "  |  " + ticTacToeBoard[3]);
+            Console.WriteLine(ticTacToeBoard[4] + "  |  " + ticTacToeBoard[5] + "  |  " + ticTacToeBoard[6]);
+            Console.WriteLine(ticTacToeBoard[7] + "  |  " + ticTacToeBoard[8] + "  |  " + ticTacToeBoard[9]);
+        }
 
-            for (int i = 1; i < 10;)
+        /* UC 4 & 5*/
+        public static void UsersMove(char userSymbol )
+        {
+            int userMove = -1;
+
+            Console.WriteLine("Enter the your move between 1 to 9");
+            string move = Console.ReadLine();
+            string pattern = "^[1-9]$";
+            Regex regex = new Regex(pattern);
+
+            bool shouldNotBreak = true;
+            while (shouldNotBreak)
             {
-
-                for (int j = 1; j <= 3; j++)
+                if (regex.IsMatch(move))
                 {
-
-                    if (j != 3)
+                    userMove = Convert.ToInt32(move);
+                    if (ticTacToeBoard[userMove] == ' ')
                     {
-                        Console.Write(ticTacToeBoard[i] + "  |");
+                        Console.WriteLine("The position is marked with "+userSymbol+"\n");
+                        ticTacToeBoard[userMove] = userSymbol;
+                        ShowBoard();
+                        shouldNotBreak = false;
                     }
                     else
                     {
-                        Console.Write(ticTacToeBoard[i]);
+                        Console.WriteLine("The position is occupied, try other position");
+                        move = Console.ReadLine();
                     }
-                    i++;
-                }
 
-                Console.WriteLine("\n");
-            }
-
-        }
-
-
-        public static int UsersMove(char[] ticTacToeBoard)
-        {
-            Console.WriteLine("Enter the your move between 1 to 9");
-
-            int userMove = Convert.ToInt32(Console.ReadLine());
-            bool isnotCorrect = true;
-            while (isnotCorrect)
-            {
-                if (userMove <= 9 && userMove >= 1 && ticTacToeBoard[userMove] == ' ')
-                {
-                    return userMove;
                 }
                 else
                 {
-                    Console.WriteLine("Postion is occupied!! Enter other move between 1 to 9");
-
-                    userMove = Convert.ToInt32(Console.ReadLine());
-
+                    Console.WriteLine("Enter correct input");
+                    move = Console.ReadLine();
                 }
-            }
 
-            return userMove;
+            }
+           
         }
 
-       
-
     }
-
-
-
-
-
 
 }
