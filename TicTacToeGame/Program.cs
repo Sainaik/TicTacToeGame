@@ -5,7 +5,7 @@ namespace TicTacToeGame
 {
     class Program
     {
-        static char[] ticTacToeBoard;
+        
         static char userSymbol;
         static char computerSymbol = 'X';
         const int PLAYER = 1;
@@ -16,12 +16,12 @@ namespace TicTacToeGame
             Console.WriteLine("Hello!, Welcome to TicTac Toe Game");
 
 
-            ticTacToeBoard = CreateTicTacToeBoard();
+            char[] ticTacToeBoard = CreateTicTacToeBoard();
 
             Console.WriteLine("Board is Created \n");
 
             //to show the playing board
-            ShowBoard();
+            ShowBoard(ticTacToeBoard);
 
             //to choose Symbol
             userSymbol = ChoosePlayerSymbol();
@@ -36,14 +36,15 @@ namespace TicTacToeGame
             if (whoStartsGame == PLAYER)
             {
                 Console.WriteLine("User Starts playing first");
-                UsersMove(userSymbol);
-                isWinner = IsWinner(userSymbol);
+                UsersMove(userSymbol, ticTacToeBoard);
+                isWinner = IsWinner(userSymbol,ticTacToeBoard);
             }
             else
             {
                 Console.WriteLine("Computer Starts playing first");
-                UsersMove(computerSymbol);
-                isWinner = IsWinner(userSymbol);
+                int computerMove = ComputerMove(ticTacToeBoard);
+                Console.WriteLine("Computer move is: " + computerMove);
+                //isWinner = IsWinner(userSymbol,ticTacToeBoard);
             }
 
          
@@ -103,7 +104,7 @@ namespace TicTacToeGame
         }
 
         /* UC3 */
-        public static void ShowBoard()
+        public static void ShowBoard(char[] ticTacToeBoard) 
         {
             Console.WriteLine(ticTacToeBoard[1] + "  |  " + ticTacToeBoard[2] + "  |  " + ticTacToeBoard[3]);
             Console.WriteLine(ticTacToeBoard[4] + "  |  " + ticTacToeBoard[5] + "  |  " + ticTacToeBoard[6]);
@@ -111,7 +112,7 @@ namespace TicTacToeGame
         }
 
         /* UC 4 & 5*/
-        public static void UsersMove(char userSymbol )
+        public static void UsersMove(char userSymbol, char[] ticTacToeBoard)
         {
             int userMove = -1;
 
@@ -130,7 +131,7 @@ namespace TicTacToeGame
                     {
                         Console.WriteLine("The position is marked with "+userSymbol+"\n");
                         ticTacToeBoard[userMove] = userSymbol;
-                        ShowBoard();
+                        ShowBoard(ticTacToeBoard);
                         shouldNotBreak = false;
                     }
                     else
@@ -178,64 +179,83 @@ namespace TicTacToeGame
         }
 
         //UC8 
-        static int ComputerMove()
+        static int ComputerMove(char[] ticTacToeBoard)
         {
             int computerMove = -1;
 
             // check if computer wins
-            bool isPostionfound = false;
+            computerMove = GetPostion(computerSymbol, ticTacToeBoard);
 
-            for (int i = 1; i <= 9; i++)
-            {
-                char[] copyOfBoard = ticTacToeBoard;
-                copyOfBoard[i] = computerSymbol;
-
-                if (IsWinner(computerSymbol, copyOfBoard))
-                {
-                    computerMove = i;
-                    isPostionfound = true;
-                    break;
-                }
-
-            }
-
-            if(isPostionfound == true)
+            if(computerMove != -1)
             {
                 return computerMove;
             }
 
 
             // check if opponent wins
+            computerMove = GetPostion(userSymbol, ticTacToeBoard);
 
-            for (int i = 1; i <= 9; i++)
-            {
-                char[] copyOfBoard = ticTacToeBoard;
-                copyOfBoard[i] = computerSymbol;
-
-                if (IsWinner(userSymbol, copyOfBoard))
-                {
-                    computerMove = i;
-                    isPostionfound = true;
-                    break;
-                }
-
-            }
-
-            if (isPostionfound == true)
+            if (computerMove != -1)
             {
                 return computerMove;
+            }
+
+            //check the corners
+
+            int[] corners = {1, 3, 7, 9 };
+
+            foreach(int corner in corners)
+            {
+                if(ticTacToeBoard[corner]== ' ' )
+                {
+                    computerMove = corner;
+                    break;
+                }
             }
 
             return computerMove;
         }
 
 
-        
-            
-}
+        static int GetPostion(char symbol, char[] ticTacToeBoard)
+        {
+            int computerMove = -1;
+            for (int i = 1; i <= 9; i++)
+            {
+                char[] copyOfBoard = GetCopyOfBoard(ticTacToeBoard);
 
 
+                if (copyOfBoard[i] == ' ')
+                {
+                    copyOfBoard[i] = computerSymbol;
+                }
+
+                if (IsWinner(symbol, copyOfBoard))
+                {
+                    computerMove = i;
+                    break;
+                }
+
+            }
+            return computerMove;
+
+        }
+
+        static char[] GetCopyOfBoard(char[] board)
+        {
+            char[] boardCopy = new char[10];
+
+            Array.Copy(board, 0, boardCopy, 0, board.Length);
+
+            return boardCopy;
+        }
 
     }
 
+
+
+
+
+
 }
+
