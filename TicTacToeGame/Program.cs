@@ -8,6 +8,7 @@ namespace TicTacToeGame
         
         static char userSymbol;
         static char computerSymbol = 'X';
+        private static object computerMove;
         const int PLAYER = 1;
         const int COMPUTER = 2;
 
@@ -29,25 +30,67 @@ namespace TicTacToeGame
             //to choose the first player
             int whoStartsGame = Toss();
 
+            int whoPlays = whoStartsGame;
+
             bool isWinner = false;
 
             //to play a move
+            string winner = " ";
 
-            if (whoStartsGame == PLAYER)
+            int count = 1;
+            while(count < 10 && isWinner==false )
             {
-                Console.WriteLine("User Starts playing first");
-                UsersMove(userSymbol, ticTacToeBoard);
-                isWinner = IsWinner(userSymbol,ticTacToeBoard);
+                if ( whoPlays == PLAYER)
+                {
+                    Console.WriteLine("\nUser is Playing");
+
+                    UsersMove(userSymbol, ticTacToeBoard);
+
+                    ShowBoard(ticTacToeBoard);
+
+                    isWinner = IsWinner(userSymbol, ticTacToeBoard);
+                    
+                    if(isWinner)
+                    {
+                        winner = "Player";
+                        break;
+                    }
+
+                    whoPlays = COMPUTER;
+
+                }
+                else
+                {
+                    Console.WriteLine("Computer is playing ");
+                    
+                    ComputerMove(ticTacToeBoard);
+
+                    ShowBoard(ticTacToeBoard);
+
+                    isWinner = IsWinner(computerSymbol, ticTacToeBoard);
+
+                    if (isWinner)
+                    {
+                        winner = "Computer";
+                        break;
+                    }
+
+                    whoPlays = PLAYER;
+                }
+
+
+                count++;
+
+
+            }
+            if (isWinner)
+            {
+                Console.WriteLine(winner + " won the game !!!");
             }
             else
             {
-                Console.WriteLine("Computer Starts playing first");
-                int computerMove = ComputerMove(ticTacToeBoard);
-                Console.WriteLine("Computer move is: " + computerMove);
-                //isWinner = IsWinner(userSymbol,ticTacToeBoard);
+                Console.WriteLine("Hola!! It's a Tie");
             }
-
-         
         }
 
         /*UC 1*/
@@ -76,7 +119,7 @@ namespace TicTacToeGame
             {
                 if (!playerSymbol.Equals("X") && !playerSymbol.Equals("O"))
                 {
-                    Console.WriteLine("please choose playing symbol between (O or X):");
+                    Console.WriteLine("\nplease choose playing symbol between (O or X):");
                     playerSymbol = Console.ReadLine();
                 }
                 else
@@ -131,7 +174,7 @@ namespace TicTacToeGame
                     {
                         Console.WriteLine("The position is marked with "+userSymbol+"\n");
                         ticTacToeBoard[userMove] = userSymbol;
-                        ShowBoard(ticTacToeBoard);
+                        //ShowBoard(ticTacToeBoard);
                         shouldNotBreak = false;
                     }
                     else
@@ -179,7 +222,7 @@ namespace TicTacToeGame
         }
 
         //UC8 
-        static int ComputerMove(char[] ticTacToeBoard)
+        static void ComputerMove(char[] ticTacToeBoard)
         {
             int computerMove = -1;
 
@@ -188,7 +231,8 @@ namespace TicTacToeGame
 
             if(computerMove != -1)
             {
-                return computerMove;
+                ticTacToeBoard[computerMove] = computerSymbol;
+                return;
             }
 
 
@@ -197,7 +241,8 @@ namespace TicTacToeGame
 
             if (computerMove != -1)
             {
-                return computerMove;
+                ticTacToeBoard[computerMove] = computerSymbol;
+                return;
             }
 
             //check the corners
@@ -213,13 +258,20 @@ namespace TicTacToeGame
                 }
             }
 
+            if (computerMove != -1)
+            {
+                ticTacToeBoard[computerMove] = computerSymbol;
+                return;
+            }
+
             //check the center
             int boardCenter = 5;
 
             if (ticTacToeBoard[boardCenter] == ' ')
             {
-                computerMove = boardCenter;
-                return computerMove;   
+                ticTacToeBoard[computerMove] = computerSymbol;
+                return;
+
             }
 
             //check the corners
@@ -234,9 +286,12 @@ namespace TicTacToeGame
                     break;
                 }
             }
+            if (computerMove != -1)
+            {
+                ticTacToeBoard[computerMove] = computerSymbol;
+                return;
+            }
 
-
-            return computerMove;
         }
 
 
@@ -250,7 +305,7 @@ namespace TicTacToeGame
 
                 if (copyOfBoard[i] == ' ')
                 {
-                    copyOfBoard[i] = computerSymbol;
+                    copyOfBoard[i] = symbol;
                 }
 
                 if (IsWinner(symbol, copyOfBoard))
