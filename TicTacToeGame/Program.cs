@@ -199,6 +199,33 @@ namespace TicTacToeGame
 
             }
 
+            if(isPostionfound == true)
+            {
+                return computerMove;
+            }
+
+
+            // check if opponent wins
+
+            for (int i = 1; i <= 9; i++)
+            {
+                char[] copyOfBoard = ticTacToeBoard;
+                copyOfBoard[i] = computerSymbol;
+
+                if (IsWinner(userSymbol, copyOfBoard))
+                {
+                    computerMove = i;
+                    isPostionfound = true;
+                    break;
+                }
+
+            }
+
+            if (isPostionfound == true)
+            {
+                return computerMove;
+            }
+
             return computerMove;
         }
 
