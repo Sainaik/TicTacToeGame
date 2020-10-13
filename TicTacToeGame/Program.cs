@@ -29,7 +29,7 @@ namespace TicTacToeGame
             //to choose the first player
             int whoStartsGame = Toss();
 
-            bool notwin = true;
+            bool isWinner = false;
 
             //to play a move
 
@@ -37,12 +37,13 @@ namespace TicTacToeGame
             {
                 Console.WriteLine("User Starts playing first");
                 UsersMove(userSymbol);
-
+                isWinner = IsWinner(userSymbol);
             }
             else
             {
                 Console.WriteLine("Computer Starts playing first");
                 UsersMove(computerSymbol);
+                isWinner = IsWinner(userSymbol);
             }
 
          
@@ -156,9 +157,30 @@ namespace TicTacToeGame
             return random.Next(1, 3);
         }
 
+        /*UC7*/
+        static bool IsWinner(char ch)
+        {
+            bool isWin = false;
+
+            if ((ticTacToeBoard[1] == ch && ticTacToeBoard[2] == ch && ticTacToeBoard[3] == ch) ||
+               (ticTacToeBoard[4] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[6] == ch) ||
+               (ticTacToeBoard[7] == ch && ticTacToeBoard[8] == ch && ticTacToeBoard[9] == ch) ||
+               (ticTacToeBoard[1] == ch && ticTacToeBoard[4] == ch && ticTacToeBoard[7] == ch) ||
+               (ticTacToeBoard[2] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[8] == ch) ||
+               (ticTacToeBoard[3] == ch && ticTacToeBoard[6] == ch && ticTacToeBoard[9] == ch) ||
+               (ticTacToeBoard[1] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[9] == ch) ||
+               (ticTacToeBoard[3] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[7] == ch))
+            {
+                isWin = true;
+            }
+            return isWin;
+
+        }
 
 
-        
+
+
+
     }
 
 }
