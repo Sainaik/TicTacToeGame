@@ -213,6 +213,15 @@ namespace TicTacToeGame
                 }
             }
 
+            //check the center
+            int boardCenter = 5;
+
+            if (ticTacToeBoard[boardCenter] == ' ')
+            {
+                computerMove = boardCenter;
+                return computerMove;   
+            }
+          
             return computerMove;
         }
 
