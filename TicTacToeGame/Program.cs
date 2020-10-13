@@ -221,7 +221,21 @@ namespace TicTacToeGame
                 computerMove = boardCenter;
                 return computerMove;   
             }
-          
+
+            //check the corners
+
+            int[] otherPositions = { 2, 4, 6, 8 };
+
+            foreach (int postion in otherPositions)
+            {
+                if (ticTacToeBoard[postion] == ' ')
+                {
+                    computerMove = postion;
+                    break;
+                }
+            }
+
+
             return computerMove;
         }
 
