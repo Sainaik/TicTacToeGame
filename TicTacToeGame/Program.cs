@@ -158,18 +158,18 @@ namespace TicTacToeGame
         }
 
         /*UC7*/
-        static bool IsWinner(char ch)
+        static bool IsWinner(char ch, char[]board)
         {
             bool isWin = false;
 
-            if ((ticTacToeBoard[1] == ch && ticTacToeBoard[2] == ch && ticTacToeBoard[3] == ch) ||
-               (ticTacToeBoard[4] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[6] == ch) ||
-               (ticTacToeBoard[7] == ch && ticTacToeBoard[8] == ch && ticTacToeBoard[9] == ch) ||
-               (ticTacToeBoard[1] == ch && ticTacToeBoard[4] == ch && ticTacToeBoard[7] == ch) ||
-               (ticTacToeBoard[2] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[8] == ch) ||
-               (ticTacToeBoard[3] == ch && ticTacToeBoard[6] == ch && ticTacToeBoard[9] == ch) ||
-               (ticTacToeBoard[1] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[9] == ch) ||
-               (ticTacToeBoard[3] == ch && ticTacToeBoard[5] == ch && ticTacToeBoard[7] == ch))
+            if ((board[1] == ch && board[2] == ch && board[3] == ch) ||
+               ( board[4] == ch && board[5] == ch && board[6] == ch) ||
+               ( board[7] == ch && board[8] == ch && board[9] == ch) ||
+               ( board[1] == ch && board[4] == ch && board[7] == ch) ||
+               ( board[2] == ch && board[5] == ch && board[8] == ch) ||
+               ( board[3] == ch && board[6] == ch && board[9] == ch) ||
+               ( board[1] == ch && board[5] == ch && board[9] == ch) ||
+               ( board[3] == ch && board[5] == ch && board[7] == ch))
             {
                 isWin = true;
             }
@@ -177,7 +177,35 @@ namespace TicTacToeGame
 
         }
 
+        //UC8 
+        static int ComputerMove()
+        {
+            int computerMove = -1;
 
+            // check if computer wins
+            bool isPostionfound = false;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                char[] copyOfBoard = ticTacToeBoard;
+                copyOfBoard[i] = computerSymbol;
+
+                if (IsWinner(computerSymbol, copyOfBoard))
+                {
+                    computerMove = i;
+                    isPostionfound = true;
+                    break;
+                }
+
+            }
+
+            return computerMove;
+        }
+
+
+        
+            
+}
 
 
 
